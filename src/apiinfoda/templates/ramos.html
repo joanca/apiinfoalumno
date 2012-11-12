@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{alumno.nombre}} | Infoalumno {% endblock %}
+
+{% block contenido %}
+
+<body class="group">
+	<header>
+		<img src="data:image/pjpeg;base64,{{alumno.avatar}}" />
+		{% if alumno.nombre|length>27 %}
+		<h1>{{alumno.nombre|truncate(27)}}</h1>
+		{% else %}
+		<h1>{{alumno.nombre}}</h1>
+		{% endif %}
+		<h2>{{alumno.carrera}}</h2>
+
+		<nav>
+			<li class="mail"><a href="mailto:juaravena@udec.cl">Contacto</a></li>
+			<li class="git"><a href="https://github.com/juankaravena/infoalumno">Código</a></li>
+			<li class="info"><a href="/logout/" class="logout">Desconectarse</a></li>
+		</nav>
+	</header>
+	<section>
+		<aside id="sidebar">
+			<li><a href="/home/">Ramos</a></li>
+			<li><a href="/curricular/">Curricular</a></li>
+		</aside>
+
+		<aside id="contenido" class="group">
+		{% for ramo in materiales recursive %}
+			<article>
+				<h2>{{ramo.asignatura.nombre}}</h2>
+				<nav>
+					<li><a href="/ramo/{{ramo.asignatura.codigo}}/">Materiales</a></li>
+					<li><a href="/ramo/{{ramo.asignatura.codigo}}/notas/">Notas</a></li>
+				</nav>
+				<ul>
+				{% for material in ramo.materiales %}
+					<li><a href="{{material.url}}">{{material.nombre}}</a></li>
+				{% endfor %}
+				</ul>
+			</article>
+		{% endfor %}
+		</aside>
+	</section>
+</body>
+
+{% endblock %}

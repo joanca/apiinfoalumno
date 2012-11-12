@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{alumno.nombre}} | Infoalumno {% endblock %}
+
+{% block contenido %}
+
+<body class="group">
+	<header>
+		<img src="data:image/pjpeg;base64,{{alumno.avatar}}" />
+		{% if alumno.nombre|length>27 %}
+		<h1>{{alumno.nombre|truncate(27)}}</h1>
+		{% else %}
+		<h1>{{alumno.nombre}}</h1>
+		{% endif %}
+		<h2>{{alumno.carrera}}</h2>
+
+		<nav>
+			<li class="mail"><a href="mailto:juaravena@udec.cl">Contacto</a></li>
+			<li class="git"><a href="https://github.com/juankaravena/infoalumno">Código</a></li>
+			<li class="info"><a href="/logout/" class="logout">Desconectarse</a></li>
+		</nav>
+	</header>
+	<section>
+		<aside id="sidebar">
+			<li><a href="/home/">Ramos</a></li>
+			<li><a href="/curricular/">Curricular</a></li>
+		</aside>
+
+		<aside id="contenido" class="group">
+			<article>
+				<h2>{{notas.asignatura.nombre}}</h2>
+				<nav>
+					<li><a href="/ramo/{{notas.asignatura.codigo}}/">Materiales</a></li>
+					<li><a href="/ramo/{{notas.asignatura.codigo}}/notas/">Notas</a></li>
+				</nav>
+			</article>
+			{% if recuperacion.nombre != '' %}
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Fecha</th>
+							<th scope="col">Evaluación</th>
+							<th scope="col">Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for prueba in notas.evaluaciones recursive %}
+						<tr>
+								<td>{{prueba.fecha}}</td>
+								<td>{{prueba.evaluacion}}</td>
+								<td>{{prueba.nota}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<li>{{recuperacion.nombre}}: {{recuperacion.nota}}</li>
+				<li class="final">{{final.nombre}}: {{final.nota}}</li>
+			{% else %}
+				<li class="error">No tienes notas en este ramo.</li>
+			{% endif %}
+		</aside>
+	</section>
+</body>
+
+{% endblock %}

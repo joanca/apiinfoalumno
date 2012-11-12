@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Infoalumno UDEC{% endblock %}
+
+{% block contenido %}
+
+<body id="index">
+	<article id="inicio">
+		<h1>Infoalumno</h1>
+		<h2>Portal no oficial</h2>
+
+		<form id="login" action="" method="post">
+			<input name="username" type="text" placeholder="Usuario sin @udec.cl">
+			<input name="password" type="password" placeholder="Contraseña">
+			<input type="submit" value="Conectarse" >
+		</form>
+		<br/>
+
+		<p class="copyright">
+			<a class="mail" href="mailto:juaravena@udec.cl" title="Contacto">juaravena@udec.cl</a> | <a class="git" href="#" title="Código fuente en Github">Código fuente</a> | <a href="http://udec.cl" title="Universidad de Concepción">Udec</a>
+		</p>
+	</article>
+</body>
+
+{% endblock %}

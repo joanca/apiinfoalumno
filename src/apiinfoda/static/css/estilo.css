@@ -1,0 +1,450 @@
+/*******************
+    General
+*******************/
+@import url('normalize.css');
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+body {
+    background: #3299BB;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    max-width: 2000px;
+}
+
+h1 {
+    font-size: 32px;
+    margin:0;
+}
+h2 {
+    font-size: 24px;
+}
+p.copyright {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+}
+a {
+    color: #FF0051;
+}
+a:hover {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a.mail {
+    background: url(../img/sprites.png) no-repeat;
+    background-position: 0px 4px;
+    padding-left: 20px;
+}
+a.git {
+    background: url(../img/sprites.png) no-repeat;
+    background-position: 0px -22px;
+    padding-left: 20px;
+}
+
+/*******************
+    Index
+*******************/
+body#index {
+    background: #3299BB url('../img/bg2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 12% auto;
+    opacity: 0.9;
+    padding: 20px;
+    max-width: 800px;
+}
+article#inicio {
+    background: white;
+    box-shadow: 10px 10px 13px #2E3579;
+    border: 8px solid #121838;
+    border-radius: 25px 25px 25px 25px;
+    padding: 20px;
+    width: 100%;
+}
+
+/*******************
+    Header
+*******************/
+header {
+    background: #FFFFFF;
+    border-bottom: 5px solid;
+    box-shadow: 0 1px 30px;
+    margin: 0;
+    padding: 0 10%;
+    position: relative;
+}
+header h1 {
+
+}
+header h2 {
+    margin: 0 0 11px;
+}
+header img {
+    float: left;
+    margin: 5px 20px 5px 0;
+    width: 70px;
+}
+
+nav {
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    float: right;
+    font-size: 16px;
+    margin: -78px -90px;
+    width: 400px;
+}
+nav li {
+    background: url(../img/sprites.png) no-repeat;
+    list-style: none;
+    padding: 0 20px;
+}
+nav li.info {
+    background-position: 0px -49px;
+}
+nav li.git {
+    background-position: 0px -22px;
+}
+nav li.mail {
+    background-position: 0px 3px;
+}
+/*******************
+    Contenido
+*******************/
+section {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 5px solid;
+    bottom: 0;
+    box-shadow: 0 20px 30px;
+    max-height: 82%;
+    margin: 30px 10% 0;
+    position: relative;
+    width: 80%;
+}
+section li {
+    list-style: none
+}
+
+aside#sidebar {
+    border-bottom: 5px solid;
+    border-right: 5px solid;
+    height: 40px;
+    font-size: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+aside#sidebar li {
+    float: left;
+    padding: 5px 10px;
+}
+aside#contenido {
+    margin: -15px 0;
+    padding: 10px;
+}
+aside#contenido h2{
+    margin: 7px 0 15px;
+}
+aside a {
+    display: block;
+}
+
+article {
+    float: left;
+    margin: 0 20px 10px 0;
+    width: 100%;
+}
+
+article#resumen {
+    float: left;
+    margin: 0 0 20px;
+    width: 100%;
+}
+
+aside nav {
+    border-bottom: 5px solid;
+    border-top: 5px solid;
+    font-size: 20px;
+    margin: -10px;
+    max-width: 100%;
+    padding: 7px 10px;
+    width: 100%;
+}
+aside nav li {
+    background: none;
+    margin-left: -5px;
+}
+aside#contenido article ul{
+    margin: 65px 0 0 -35px;
+}
+table {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+table thead {
+    text-align: justify;
+}
+table td {
+    font-size: 14px;
+    text-transform: capitalize;
+}
+aside#contenido li.final{
+    font-weight: 600;
+    margin: 10px 0;
+}
+aside#contenido li.error{
+    font-weight: 600;
+    margin: 100px 10px 10px;
+}
+/*****************************************************/
+
+/*******************
+    Responsive Design
+*******************/
+@media screen and (max-width: 1000px){
+    body{
+        max-width: 1000px;
+
+    }
+    header{
+        max-width: 100%;
+        padding: 0 10px;
+        height: 86px;
+    }
+    header h1 {
+        font-size: 28px;
+        padding: 4px 0;
+    }
+    header h2 {
+        font-size: 22px;
+    }
+    nav {
+        column-gap: 0;
+        -moz-column-gap: 0;
+        -webkit-column-gap: 0;
+        max-width: 320px;
+        margin: -78px -30px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    body{
+        max-width: 800px;
+    }
+    header{
+        height: 115px;
+    }
+    nav{
+        float: none;
+        margin: 0;
+        column-count: 0;
+        -moz-column-count: auto;
+        -webkit-column-count: 0;
+        max-width: 800px;
+        width: 100%;
+        position: absolute;
+    }
+    nav li{
+        float: left;
+    }
+    aside#sidebar{
+        width: 100%;
+        padding: 0;
+        height: 40px;
+        box-shadow: none;
+    }
+    aside#sidebar li {
+        float: left;
+        padding: 5px 10px;
+    }
+    aside#contenido{
+        margin: 0;
+    }
+    aside#contenido h2{
+        margin: -5px 0 15px;
+    }
+    article{
+        width: 100%;
+    }
+    aside#contenido article ul{
+        margin: 65px 0 0 -35px;
+    }
+    aside nav{
+        padding: 7px 0;
+    }
+    table{
+        margin-top: 35px;
+        margin-bottom: 0px;
+    }
+}
+
+@media screen and (max-width:600px){
+    body#index {
+        background: #3299BB url('../img/bg-movil.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin: 0px auto;
+        max-width: 600px;
+        padding: 0px;
+    }
+    article#inicio{
+        border: none;
+        border-radius: 0px;
+        box-shadow: none;
+        margin: 0px auto;
+    }
+    p.copyright{
+        margin-left: -30px;
+    }
+    body{
+        max-width: 600px;
+    }
+    header{
+        height: 115px;
+    }
+    nav{
+        float: none;
+        margin: 0;
+        column-count: 0;
+        -moz-column-count: auto;
+        -webkit-column-count: 0;
+        max-width: 600px;
+        width: 100%;
+        position: absolute;
+    }
+    nav li{
+        float: left;
+    }
+    aside#sidebar{
+        width: 100%;
+        padding: 0;
+        height: 40px;
+        box-shadow: none;
+    }
+    aside#sidebar li {
+        float: left;
+        padding: 5px 10px;
+    }
+    aside#contenido{
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:480px){
+    body#index {
+        margin: 0px auto;
+        max-width: 480px;
+        padding: 0px;
+    }
+    article#inicio{
+        border: none;
+        border-radius: 0px;
+        box-shadow: none;
+        margin: 0px auto;
+    }
+    p.copyright{
+        margin-left: -30px;
+    }
+    body{
+        max-width: 480px;
+    }
+    header{
+        height: 90px;
+    }
+    header h1{
+        font-size: 24px;
+        padding: 0;
+    }
+    header h2{
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+    header img{
+        width: 50px;
+        margin: 5px 10px 5px 0;
+    }
+    nav{
+        float: none;
+        margin: 0;
+        column-count: 0;
+        -moz-column-count: auto;
+        -webkit-column-count: 0;
+        max-width: 480px;
+        width: 100%;
+        position: absolute;
+    }
+    nav li{
+        float: left;
+        font-size: 15px;
+    }
+
+    section{
+        border: medium none;
+        margin: 0;
+        max-height: 100%;
+        max-width: 480px;
+        width: 100%;
+    }
+
+    aside#sidebar{
+        width: 100%;
+        padding: 0;
+        height: 40px;
+        box-shadow: none;
+        border-right: none;
+    }
+    aside#sidebar li {
+        float: left;
+        padding: 5px 10px;
+    }
+    aside#contenido{
+        margin: 0;
+    }
+    aside nav li{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    body{
+        max-width: 380px;
+    }
+    header{
+        height: 74px;
+    }
+    header h1{
+        font-size: 17px;
+    }
+    header h2{
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    header img{
+        width: 40px;
+        margin: 5px 10px 5px 0;
+    }
+    nav{
+        margin-top: 2px;
+        max-width: 380px;
+    }
+    nav li{
+        font-size: 14px;
+        padding-bottom: 3px;
+        padding-right: 5px;
+    }
+}
+
+/*********************
+Fixes
+*********************/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}

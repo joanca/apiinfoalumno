@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{alumno.nombre}} | Infoalumno {% endblock %}
+
+{% block contenido %}
+
+<body class="group">
+	<header>
+		<img src="data:image/pjpeg;base64,{{alumno.avatar}}" />
+		{% if alumno.nombre|length>27 %}
+		<h1>{{alumno.nombre|truncate(27)}}</h1>
+		{% else %}
+		<h1>{{alumno.nombre}}</h1>
+		{% endif %}
+		<h2>{{alumno.carrera}}</h2>
+
+		<nav>
+			<li class="mail"><a href="mailto:juaravena@udec.cl">Contacto</a></li>
+			<li class="git"><a href="https://github.com/juankaravena/infoalumno">Código</a></li>
+			<li class="info"><a href="/logout/" class="logout">Desconectarse</a></li>
+		</nav>
+	</header>
+	<section>
+		<aside id="sidebar">
+			<li><a href="/home/">Ramos</a></li>
+			<li><a href="/curricular/">Curricular</a></li>
+		</aside>
+
+		<aside id="contenido" class="group">
+			<article id="resumen">
+				<h2>Resumen</h3>
+					<li><strong>Estado actual:</strong> {{alumno.estado_carrera}}</li>
+					<li><strong>Matrícula:</strong> {{alumno.matricula}}
+					<li><strong>Ramos:</strong> {{alumno.total_ramos}}</li>
+					<li><strong>Créditos aprobados:</strong> {{alumno.creditos_aprobados}}</li>
+					<li><strong>Créditos reprobados:</strong> {{alumno.creditos_reprobados}}</li>
+			</article>
+
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">Ramo</th>
+						<th scope="col">Créditos</th>
+						<th scope="col">Promedio</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for ramo in alumno.asignaturas recursive %}
+					<tr>
+							<td>{{ramo.nombre}}</td>
+							<td>{{ramo.creditos}}</td>
+							<td>{{ramo.nota}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</aside>
+	</section>
+</body>
+
+{% endblock %}
