@@ -1,0 +1,37 @@
+application: infoalumno-udec
+version: 2-flask
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "5d"
+
+builtins:
+- appstats: on
+- admin_redirect: on
+- deferred: on
+- remote_api: on
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.15"
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /favicon.ico
+  static_files: apiinfoda/static/img/favicon.ico
+  upload: apiinfoda/static/img/favicon.ico
+
+- url: /robots.txt
+  static_files: api-nfoda/static/robots.txt
+  upload: apiinfoda/static/robots.txt
+
+- url: /static
+  static_dir: apiinfoda/static
+
+- url: .*
+  script: apiinfoda.app

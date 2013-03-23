@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, session, url_for, jsonify
+from google.appengine.api import memcache
 
 def login():
 	if 'username' and 'password' in session:
@@ -18,46 +19,52 @@ def logout():
     session.pop('password', None)
     return redirect(url_for('login'))
 
-import infoda
-
 def home():
 	if 'username' and 'password' in session:
-		infoalumno = infoda.Infoda(session['username'], session['password'])
-		info = infoalumno.getInfo()
+		info = memcache.get('info-%s' % session['username'])
+		if not info:
+			import infoda
+			infoalumno = infoda.Infoda(session['username'], session['password'])
+			info = infoalumno.getInfo()
+			info = jsonify(alumno=info)
 
-		datos_alumno = dict(info=info)
+			memcache.add('info-%s' % session['username'], info, 60*60)
 
-		return jsonify(alumno=datos_alumno)
+		return info
 
 	else:
 		return redirect(url_for('login'))
 
 def curricular():
 	if 'username' and 'password' in session:
-		infoalumno = infoda.Infoda(session['username'], session['password'])
-		info = infoalumno.getInfo()
+		info = memcache.get('info-%s' % session['username'])
+		if not info:
+			import infoda
+			infoalumno = infoda.Infoda(session['username'], session['password'])
+			info = infoalumno.getInfo()
+			info = jsonify(alumno=info)
 
-		return jsonify(alumno=info)
+			memcache.add('info-%s' % session['username'], info, 60*60)
+
+		return info
 
 	else:
 		return redirect(url_for('login'))
 
 def ramo(idasig=None):
 	if 'username' and 'password' in session:
-		infoalumno = infoda.Infoda(session['username'], session['password'])
-		info = infoalumno.getInfo()
-
-		datos_alumno = dict(
-			nombre=info['nombre'],
-			avatar=info['avatar'],
-			carrera=info['carrera'])
-
 		if idasig is not None:
-			materiales = infoalumno.getMateriales(idasig)
+			materiales = memcache.get('materiales-%s-%s' % (session['username'], idasig))
+			if not materiales:
+				import infoda
+				infoalumno = infoda.Infoda(session['username'], session['password'])
+				materiales = infoalumno.getMateriales(idasig)
+				materiales = jsonify(materiales=materiales)
 
-			return jsonify(materiales=materiales, alumno=datos_alumno)
+				memcache.add('materiales-%s-%s' % (session['username'], idasig), materiales, 60*60)
 
-		
+			return materiales
+
 		else:
 			return redirect(url_for('home'))
 
@@ -66,18 +73,36 @@ def ramo(idasig=None):
 
 def notas(idasig=None):
 	if 'username' and 'password' in session:
-		infoalumno = infoda.Infoda(session['username'], session['password'])
-		info = infoalumno.getInfo()
-
-		datos_alumno = dict(
-			nombre=info['nombre'],
-			avatar=info['avatar'],
-			carrera=info['carrera'])
-
 		if idasig is not None:
-			notas = infoalumno.getNotas(idasig)
+			notas = memcache.get('notas-%s-%s' % (session['username'], idasig))
+			if not notas:
+				import infoda
+				infoalumno = infoda.Infoda(session['username'], session['password'])
+				notas = infoalumno.getNotas(idasig)
+				notas = jsonify(notas)
 
-			return jsonify(notas=notas, alumno=datos_alumno)
+				memcache.add('notas-%s-%s' % (session['username'], idasig), notas, 60*60)
+
+			return notas
 
 	else:
 		return redirect(url_for('login'))
+
+
+############
+# Desarrollo
+############
+
+#def loginpage():
+#	if 'username' and 'password' in session:
+#		return redirect(url_for('home'))
+#
+#	else:
+#		template = '''
+#		<form action="/login/" method="post">
+#			<input name="username" type="text">
+#			<input name="password" type="password">
+#			<input type="submit" value="login">
+#		</form>
+#		'''
+#		return template

@@ -3,6 +3,9 @@ from flask import render_template
 from apiinfoda import app
 from apiinfoda import views
 
+# Home login (desarrollo)
+#app.add_url_rule('/', 'loginpage', view_func=views.loginpage)
+
 # Login
 app.add_url_rule('/', 'login', view_func=views.login, methods=['GET', 'POST'])
 

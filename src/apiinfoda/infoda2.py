@@ -128,9 +128,6 @@ class Infoda():
 						else:
 							url = material.get('href')
 
-						d = dict(nombre=nombre_mat, url=url)
-						info_materiales.append(d)
-
 					p = dict(asignatura=ramo, materiales=info_materiales)
 					datos_materiales.append(p)
 
